@@ -11,20 +11,16 @@ db_config = {
 }
 
 if __name__ == "__main__":
-    # Загрузка конфигурации
     try:
         with open('config.json', 'r', encoding='utf-8') as f:
             db_config = json.load(f)
     except:
         db_config = db_config
 
-    # Создание объекта для работы с таблицей 'students'
     db = SQLTable(db_config, 'students')
 
-    # 1. CREATE TABLE - Создание таблицы
     db.create_table('id INT AUTO_INCREMENT PRIMARY KEY, name VARCHAR(50), grade INT')
 
-    # 2. INSERT - Вставка данных
     db.insert_create({'name': 'Napoleon', 'grade': 85})
     db.insert_create({'name': 'Putin', 'grade': 90})
     db.insert_create({'name': 'Trump', 'grade': 78})
