@@ -67,7 +67,7 @@ class SQLTable:
         cursor = self.connection.cursor()
         try:
             columns = ', '.join(data.keys())
-            values = ', '.join(['%s'] * len(data))
+            values = ', '.join([] * len(data))
             query = f"INSERT INTO {self.table_name} ({columns}) VALUES ({values})"
             cursor.execute(query, list(data.values()))
             self.connection.commit()
@@ -98,7 +98,7 @@ class SQLTable:
     def update(self, data, condition):
         cursor = self.connection.cursor()
         try:
-            set_clause = ', '.join([f"{k} = %s" for k in data.keys()])
+            set_clause = ', '.join([f"{k}" for k in data.keys()])
             query = f"UPDATE {self.table_name} SET {set_clause} WHERE {condition}"
             cursor.execute(query, list(data.values()))
             self.connection.commit()
